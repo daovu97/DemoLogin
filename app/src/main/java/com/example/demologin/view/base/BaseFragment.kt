@@ -20,24 +20,23 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
 
     var navigation: Navigation? = null
 
+    val mActivity: BaseActivity<*, *>? by lazy {
+       return@lazy this.activity as? BaseActivity<*, *>
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        navigation = (activity as? BaseActivity<*, *>)?.navigation
+        navigation = mActivity?.navigation
 
-        viewModel.isShowProgress.observe(this, Observer { isShow ->
-            (activity as? BaseActivity<*, *>)?.showProgress(isShow)
-        })
+        viewModel.isShowProgress.observe(this) { isShow ->
+            mActivity?.showProgress(isShow)
+        }
     }
 
     open fun setupView() {}
 
-    open fun makeViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) {
-    }
+    open fun makeViewBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
