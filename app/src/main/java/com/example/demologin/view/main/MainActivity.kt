@@ -17,20 +17,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun onCreated(savedInstanceState: Bundle?) {
         super.onCreated(savedInstanceState)
 
-        navigation?.push(CoffeeFragment())
+        navigation?.push(CoffeeFragment(), "A")
     }
 
     override fun makeViewBinding() {
         super.makeViewBinding()
         binding = ActivityMainBinding.inflate(layoutInflater)
-    }
-
-    override fun onBackPressed() {
-        if (navigation == null || navigation?.fragments?.count() == 1) {
-            finish()
-        } else {
-            navigation?.fragments?.removeLast()
-            super.onBackPressed()
-        }
     }
 }

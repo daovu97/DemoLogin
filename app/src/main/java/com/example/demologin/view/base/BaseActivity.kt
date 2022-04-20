@@ -5,10 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import javax.inject.Inject
 
-interface NavigationWrap {
-    var navigation: Navigation?
-}
-
 open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(), NavigationWrap {
 
     @Inject
@@ -29,4 +25,13 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
     }
 
     open fun onCreated(savedInstanceState: Bundle?) {}
+
+    override fun onBackPressed() {
+        if (navigation == null || navigation?.fragments?.count() == 1) {
+            finish()
+        } else {
+            navigation?.fragments?.removeLast()
+            super.onBackPressed()
+        }
+    }
 }

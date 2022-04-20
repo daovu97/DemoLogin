@@ -7,12 +7,6 @@ import androidx.fragment.app.FragmentManager
 import com.example.demologin.R
 import javax.inject.Inject
 
-interface Navigation {
-    var fragments: MutableList<Fragment>
-    fun push(fragment: Fragment, tag: String? = null)
-    fun pop(tag: String? = null)
-}
-
 class MainNavigation constructor(
     val activity: AppCompatActivity,
     @IdRes var containerID: Int
@@ -35,6 +29,12 @@ class MainNavigation constructor(
     }
 
     override fun pop(tag: String?) {
+        if (tag != null) {
+          val index = fragments.indexOfFirst { it.tag == tag }
+            fragments.removeAll(fragments.subList(index + 1, fragments.size - 1))
+            fragmentManager.popBackStack(tag, 0)
+            return
+        }
         activity.onBackPressed()
     }
 }

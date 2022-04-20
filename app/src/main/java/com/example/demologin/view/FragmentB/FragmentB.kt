@@ -19,5 +19,12 @@ class FragmentB: BaseFragment<BaseViewModel, FragmentBBinding>() {
     override fun setupView() {
         super.setupView()
         binding.root.setOnClickListener {  navigation?.pop() }
+
+        binding.button.setOnClickListener {
+            navigation?.push(FragmentB(), "C")
+        }
+        binding.button2.setOnClickListener {
+            navigation?.pop("A")
+        }
     }
 }
