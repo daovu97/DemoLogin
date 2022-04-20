@@ -32,7 +32,7 @@ class CoffeeFragment : BaseFragment<CoffeeViewModel, FragmentCoffeeBinding>() {
     override fun setupView() {
         super.setupView()
         binding.rvCoffee.adapter = adapter
-        binding.root.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             navigation?.push(FragmentB(), "B")
         }
 

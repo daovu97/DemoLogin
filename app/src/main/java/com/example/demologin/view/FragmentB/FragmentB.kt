@@ -7,8 +7,11 @@ import com.example.demologin.databinding.FragmentBBinding
 import com.example.demologin.databinding.FragmentCoffeeBinding
 import com.example.demologin.view.base.BaseFragment
 import com.example.demologin.view.base.BaseViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class FragmentB : BaseFragment<BaseViewModel, FragmentBBinding>() {
+@AndroidEntryPoint
+class FragmentB : BaseFragment<FragmentBViewModel, FragmentBBinding>() {
     override fun makeViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,5 +31,12 @@ class FragmentB : BaseFragment<BaseViewModel, FragmentBBinding>() {
         binding.button2.setOnClickListener {
             navigation?.pop("A")
         }
+
+        viewModel.toString()
     }
+
+}
+
+class FragmentBViewModel @Inject constructor() : BaseViewModel() {
+
 }

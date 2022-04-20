@@ -47,13 +47,9 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
         if (view == null) {
             makeViewBinding(inflater, container, savedInstanceState)
             view = binding
+            setupView()
         }
 
         return this.view!!.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupView()
     }
 }
