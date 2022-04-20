@@ -21,8 +21,10 @@ class MainNavigation constructor(
     override fun push(fragment: Fragment, tag: String?) {
         fragments.add(fragment)
         fragmentManager.beginTransaction()
-            .setCustomAnimations(R.anim.from_right, R.anim.to_left,
-                R.anim.from_left, R.anim.to_right)
+            .setCustomAnimations(
+                R.anim.from_right, R.anim.to_left,
+                R.anim.from_left, R.anim.to_right
+            )
             .replace(containerID, fragment)
             .addToBackStack(tag)
             .commit()
@@ -30,7 +32,7 @@ class MainNavigation constructor(
 
     override fun pop(tag: String?) {
         if (tag != null) {
-          val index = fragments.indexOfFirst { it.tag == tag }
+            val index = fragments.indexOfFirst { it.tag == tag }
             fragments.removeAll(fragments.subList(index + 1, fragments.size - 1))
             fragmentManager.popBackStack(tag, 0)
             return

@@ -4,5 +4,5 @@ import com.example.demologin.data.response.Coffee
 import com.example.demologin.domain.entity.UserEntity
 
 interface RegistrationRepository {
-   suspend fun getCoffees() : List<Coffee>
+    suspend fun getCoffees(): List<Coffee>
 }

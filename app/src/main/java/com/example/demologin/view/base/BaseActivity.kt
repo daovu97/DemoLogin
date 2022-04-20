@@ -3,16 +3,20 @@ package com.example.demologin.view.base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.example.demologin.resource.customView.ProgressView
 import javax.inject.Inject
 
-open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(), NavigationWrap {
+open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity() {
 
     @Inject
     lateinit var viewModel: V
 
     lateinit var binding: B
 
-    override var navigation: Navigation? = null
+    open var navigation: Navigation? = null
+
+    @Inject
+    lateinit var progress: ProgressView
 
     open fun makeViewBinding() {}
 
@@ -21,7 +25,6 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
         makeViewBinding()
         setContentView(binding.root)
         onCreated(savedInstanceState)
-
     }
 
     open fun onCreated(savedInstanceState: Bundle?) {}
@@ -33,5 +36,14 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
             navigation?.fragments?.removeLast()
             super.onBackPressed()
         }
+    }
+
+    fun showProgress(isShow: Boolean) {
+        if (isShow) {
+            progress.show(supportFragmentManager, "")
+        } else {
+            progress.dismiss()
+        }
+
     }
 }

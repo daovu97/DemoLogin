@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(ActivityComponent::class)
 abstract class Modules {
     @Binds
-   abstract fun provideRegistrationRepository(registrationRepositoryImpl: RegistrationRepositoryImpl): RegistrationRepository
+    abstract fun provideRegistrationRepository(registrationRepositoryImpl: RegistrationRepositoryImpl): RegistrationRepository
 }
 
 @Module
@@ -25,7 +25,7 @@ abstract class Modules {
 object Provider {
 
     @Provides
-    fun provideRetrofit( @AuthInterceptorClient okHttpClient: OkHttpClient) : ApiService {
+    fun provideRetrofit(@AuthInterceptorClient okHttpClient: OkHttpClient): ApiService {
         return Retrofit.Builder()
             .baseUrl("https://api.sampleapis.com")
             .client(okHttpClient)

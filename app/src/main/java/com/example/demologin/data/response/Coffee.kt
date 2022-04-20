@@ -3,7 +3,7 @@ package com.example.demologin.data.response
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Coffee  (
+data class Coffee(
     @SerializedName("title")
     @Expose
     var title: String? = null,

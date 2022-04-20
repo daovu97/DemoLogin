@@ -32,7 +32,7 @@ object NetworkModule {
     @Provides
     fun provideAuthClient(
         authInterceptor: AuthInterceptor
-    ) : OkHttpClient {
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .build()
