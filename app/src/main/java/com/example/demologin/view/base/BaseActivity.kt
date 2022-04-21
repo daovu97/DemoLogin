@@ -41,40 +41,27 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
             navigation?.fragments?.removeLast()
             super.onBackPressed()
         }
-
-//        if (navigation?.fragments?.size == 1) {
-//            showTabbar(true)
-//        } else {
-//            showTabbar(lastVisibleTabbar)
-//        }
     }
 
     fun showTabbar(isShow: Boolean) {
-        tabbar?.let {
-            it.animate()
-                .setDuration(200)
-                .translationY(if (isShow) 0f else 200f)
-                .alpha(if (isShow) 1f else 0.0f)
-                .setListener(object : Animator.AnimatorListener {
-                    override fun onAnimationStart(p0: Animator?) {
+        tabbar?.animate()?.setDuration(200)?.translationY(if (isShow) 0f else 200f)?.alpha(if (isShow) 1f else 0.0f)
+            ?.setListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(p0: Animator?) {
 
-                    }
+                }
 
-                    override fun onAnimationEnd(p0: Animator?) {
-                        tabbar?.visibility = if (isShow) View.VISIBLE else View.GONE
-                    }
+                override fun onAnimationEnd(p0: Animator?) {
+                    tabbar?.visibility = if (isShow) View.VISIBLE else View.GONE
+                }
 
-                    override fun onAnimationCancel(p0: Animator?) {
+                override fun onAnimationCancel(p0: Animator?) {
 
-                    }
+                }
 
-                    override fun onAnimationRepeat(p0: Animator?) {
+                override fun onAnimationRepeat(p0: Animator?) {
 
-                    }
-                })
-                .start()
-        }
-//        tabbar?.visibility = if (isShow) View.VISIBLE else View.GONE
+                }
+            })?.start()
     }
 
     fun showProgress(isShow: Boolean) {
@@ -89,5 +76,4 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
 fun MyFragment.pushAndHideTabbar(fragment: MyFragment) {
     fragment.isVisibleTabbar = false
     mActivity?.navigation?.push(fragment)
-    mActivity?.showTabbar(false)
 }
