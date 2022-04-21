@@ -3,12 +3,9 @@ package com.example.demologin.view.base
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.example.demologin.R
-import com.example.demologin.view.main.TabbarFragment
-import javax.inject.Inject
+import com.example.demologin.view.base.tabbar.TabbarFragment
 
 class MainNavigation constructor(
     val activity: AppCompatActivity,
@@ -46,11 +43,15 @@ class MainNavigation constructor(
     override fun pop(tag: String?) {
         if (tag != null) {
             val index = fragments.indexOfFirst { it.myTag == tag }
-            if (fragments[index] is TabbarFragment) {
-                (activity as? BaseActivity<*, *>)?.tabbar?.visibility = View.VISIBLE
+            if (index != -1 ) {
+                    if (fragments[index] is TabbarFragment) {
+                        (activity as? BaseActivity<*, *>)?.tabbar?.visibility = View.VISIBLE
+                    }
+                fragments.removeAll(fragments.subList(index, fragments.size))
+                fragmentManager.popBackStack(tag,  FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            } else {
+                activity.onBackPressed()
             }
-            fragments.removeAll(fragments.subList(index + 1, fragments.size - 1))
-            fragmentManager.popBackStack(tag, 0)
 
             return
         }

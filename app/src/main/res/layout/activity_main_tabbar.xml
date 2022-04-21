@@ -26,5 +26,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="tab1"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="tab2"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

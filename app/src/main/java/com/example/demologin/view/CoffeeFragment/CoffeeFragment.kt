@@ -33,7 +33,7 @@ class CoffeeFragment : BaseFragment<CoffeeViewModel, FragmentCoffeeBinding>() {
         super.setupView()
         binding.rvCoffee.adapter = adapter
         binding.btnNext.setOnClickListener {
-            navigation?.push(FragmentB(), "B")
+            navigation?.push(FragmentB())
         }
 
         viewModel.coffees.observe(this, Observer {

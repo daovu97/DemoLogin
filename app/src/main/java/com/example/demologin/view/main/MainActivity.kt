@@ -15,65 +15,36 @@ import com.example.demologin.databinding.FragmentCoffeeBinding
 import com.example.demologin.view.CoffeeFragment.CoffeeFragment
 import com.example.demologin.view.FragmentB.FragmentB
 import com.example.demologin.view.base.*
+import com.example.demologin.view.base.tabbar.TabbarFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainTabbarBinding>() {
 
+    private lateinit var  tabbarFragment: TabbarFragment
     override fun setupView(savedInstanceState: Bundle?) {
         super.setupView(savedInstanceState)
+        tabbarFragment = TabbarFragment(listOf(CoffeeFragment(), FragmentB()))
         navigation = MainNavigation(this, R.id.rootView,
-            TabbarFragment(listOf(CoffeeFragment(), FragmentB())))
+            tabbarFragment
+        )
         tabbar = binding.linearLayout
     }
 
     override fun makeViewBinding() {
         super.makeViewBinding()
         binding = ActivityMainTabbarBinding.inflate(layoutInflater)
+
+        binding.btn1.setOnClickListener {
+            tabbarFragment.setCurrentItem(0)
+        }
+        binding.btn2.setOnClickListener {
+            tabbarFragment.setCurrentItem(1)
+        }
     }
 }
 
-@AndroidEntryPoint
-class TabbarFragment @Inject constructor(private val fragments: List<Fragment>) : BaseFragment<BaseViewModel, CollectionDemoBinding>() {
 
-    private lateinit var collectionAdapter: CollectionPagerAdapter
 
-    override fun makeViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) {
-        super.makeViewBinding(inflater, container, savedInstanceState)
-        binding = CollectionDemoBinding.inflate(inflater, container, false)
-    }
 
-    override fun setupView() {
-        super.setupView()
-        collectionAdapter = CollectionPagerAdapter(this)
-        binding.pager.isSaveEnabled = false
-        binding.pager.adapter = collectionAdapter
-        collectionAdapter.setUpFragment(fragments = fragments)
-    }
-
-    fun setCurrentItem(index: Int, scrollEnable: Boolean = true) {
-        binding.pager.setCurrentItem(index, scrollEnable)
-    }
-
-}
-
-class CollectionPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-
-    private var fragments: List<Fragment> = emptyList()
-
-    fun setUpFragment(fragments: List<Fragment>) {
-        this.fragments = fragments
-        notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int = fragments.count()
-
-    override fun createFragment(position: Int): Fragment {
-        return fragments[position]
-    }
-}
