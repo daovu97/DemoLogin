@@ -15,7 +15,7 @@ class MainNavigation constructor(
 ) : Navigation {
 
     private val ROOT_TAG = "${this::class.java.simpleName}_Root"
-    private lateinit var fragmentManager: FragmentManager
+    private var fragmentManager: FragmentManager
     override var fragments: MutableList<Fragment> = mutableListOf()
 
     init {
@@ -51,6 +51,8 @@ class MainNavigation constructor(
     }
 
     override fun setRoot(fragment: Fragment) {
+        fragments.clear()
+        fragmentManager.popBackStackImmediate(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         push(fragment, ROOT_TAG, false)
     }
 
