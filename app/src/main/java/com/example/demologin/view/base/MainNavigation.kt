@@ -4,27 +4,37 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.demologin.R
 import javax.inject.Inject
 
 class MainNavigation constructor(
     val activity: AppCompatActivity,
-    @IdRes var containerID: Int
+    @IdRes var containerID: Int,
+    root: Fragment
 ) : Navigation {
 
+    private val ROOT_TAG = "${this::class.java.simpleName}_Root"
+    private lateinit var fragmentManager: FragmentManager
     override var fragments: MutableList<Fragment> = mutableListOf()
 
-    private val fragmentManager: FragmentManager by lazy {
-        return@lazy activity.supportFragmentManager
+    init {
+        fragmentManager = activity.supportFragmentManager
+        fragments = mutableListOf()
+        setRoot(root)
     }
 
-    override fun push(fragment: Fragment, tag: String?) {
+    override fun push(fragment: Fragment, tag: String?, withAnimation: Boolean) {
         fragments.add(fragment)
-        fragmentManager.beginTransaction()
-            .setCustomAnimations(
-                R.anim.from_right, R.anim.to_left,
-                R.anim.from_left, R.anim.to_right
-            )
+        val transaction = fragmentManager.beginTransaction()
+        if (withAnimation) {
+            transaction
+                .setCustomAnimations(
+                    R.anim.from_right, R.anim.to_left,
+                    R.anim.from_left, R.anim.to_right
+                )
+        }
+        transaction
             .replace(containerID, fragment)
             .addToBackStack(tag)
             .commit()
@@ -38,5 +48,13 @@ class MainNavigation constructor(
             return
         }
         activity.onBackPressed()
+    }
+
+    override fun setRoot(fragment: Fragment) {
+        push(fragment, ROOT_TAG, false)
+    }
+
+    override fun popToRoot() {
+        pop(ROOT_TAG)
     }
 }

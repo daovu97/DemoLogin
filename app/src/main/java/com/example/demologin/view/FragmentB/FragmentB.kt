@@ -29,7 +29,7 @@ class FragmentB : BaseFragment<FragmentBViewModel, FragmentBBinding>() {
             navigation?.push(FragmentB(), "C")
         }
         binding.button2.setOnClickListener {
-            navigation?.pop("A")
+            navigation?.popToRoot()
         }
 
         viewModel.toString()

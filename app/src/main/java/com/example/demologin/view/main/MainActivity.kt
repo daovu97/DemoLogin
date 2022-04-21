@@ -12,12 +12,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
-    override var navigation: Navigation? = MainNavigation(this, R.id.rootView)
+    override var navigation: Navigation? = null
 
     override fun onCreated(savedInstanceState: Bundle?) {
         super.onCreated(savedInstanceState)
-
-        navigation?.push(CoffeeFragment(), "A")
+        navigation = MainNavigation(this, R.id.rootView, CoffeeFragment())
     }
 
     override fun makeViewBinding() {
