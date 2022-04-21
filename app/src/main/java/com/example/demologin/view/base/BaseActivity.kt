@@ -11,24 +11,23 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
     @Inject
     lateinit var viewModel: V
 
+    @Inject
+    lateinit var progress: ProgressView
+
     lateinit var binding: B
 
     open var navigation: Navigation? = null
-
-    @Inject
-    lateinit var progress: ProgressView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         makeViewBinding()
         setContentView(binding.root)
-        onCreated(savedInstanceState)
+        setupView(savedInstanceState)
     }
 
     open fun makeViewBinding() {}
 
-    open fun onCreated(savedInstanceState: Bundle?) {}
-
+    open fun setupView(savedInstanceState: Bundle?) {}
 
     override fun onBackPressed() {
         if (navigation == null || navigation?.fragments?.count() == 1) {
@@ -45,6 +44,5 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
         } else {
             progress.dismiss()
         }
-
     }
 }
