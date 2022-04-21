@@ -7,7 +7,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 class GetCoffeesUseCase @Inject constructor(private val registrationRepository: RegistrationRepository) {
-    suspend fun invoke() : List<Coffee>  {
+    suspend fun invoke() : Result<List<Coffee>>  {
        return registrationRepository.getCoffees()
     }
 }
