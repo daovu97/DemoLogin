@@ -28,10 +28,10 @@ class FragmentB : BaseFragment<FragmentBViewModel, FragmentBBinding>() {
         binding.root.setOnClickListener { navigation?.pop() }
 
         binding.button.setOnClickListener {
-            navigation?.push(FragmentB(), "B")
+            pushAndHideTabbar(FragmentB())
         }
         binding.button2.setOnClickListener {
-            navigation?.pop("B")
+            navigation?.pop()
         }
 
         viewModel.toString()

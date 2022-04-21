@@ -1,11 +1,9 @@
 package com.example.demologin.view.base
 
-import android.view.View
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.example.demologin.R
-import com.example.demologin.view.base.tabbar.TabbarFragment
 
 class MainNavigation constructor(
     val activity: AppCompatActivity,
@@ -44,9 +42,6 @@ class MainNavigation constructor(
         if (tag != null) {
             val index = fragments.indexOfFirst { it.myTag == tag }
             if (index != -1) {
-                if (fragments[index] is TabbarFragment) {
-                    (activity as? BaseActivity<*, *>)?.tabbar?.visibility = View.VISIBLE
-                }
                 fragments.removeAll(fragments.subList(index, fragments.size))
                 fragmentManager.popBackStack(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             } else {
@@ -62,11 +57,6 @@ class MainNavigation constructor(
         fragments.clear()
         fragmentManager.popBackStackImmediate(0, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         push(fragment, ROOT_TAG, false)
-        if (fragment is TabbarFragment) {
-            (activity as? BaseActivity<*, *>)?.tabbar?.visibility = View.VISIBLE
-        } else {
-            (activity as? BaseActivity<*, *>)?.tabbar?.visibility = View.GONE
-        }
     }
 
     override fun popToRoot() {

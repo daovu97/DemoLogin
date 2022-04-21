@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import javax.inject.Inject
 
@@ -22,6 +21,8 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
 
     var navigation: Navigation? = null
 
+    var isVisibleTabbar: Boolean = true
+
     val mActivity: MyActivity? by lazy {
        return@lazy this.activity as? BaseActivity<*, *>
     }
@@ -34,6 +35,20 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
         viewModel.isShowProgress.observe(this) { isShow ->
             mActivity?.showProgress(isShow)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (parentFragment == null && isVisibleTabbar) {
+            val scale = resources.displayMetrics.density
+            val dpAsPixels = (60 * scale + 0.5f)
+
+            binding.root.setPadding(0,0,0, dpAsPixels.toInt())
+        } else {
+            binding.root.setPadding(0,0,0, 0)
+        }
+
+        mActivity?.showTabbar(isVisibleTabbar)
     }
 
     open fun setupView() {}
@@ -50,7 +65,6 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
             view = binding
             setupView()
         }
-
         return this.view!!.root
     }
 }

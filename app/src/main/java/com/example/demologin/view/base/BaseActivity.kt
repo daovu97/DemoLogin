@@ -1,5 +1,6 @@
 package com.example.demologin.view.base
 
+import android.animation.Animator
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -22,8 +23,6 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
 
     var tabbar: View? = null
 
-    var lastVisibleTabbar: Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         makeViewBinding()
@@ -43,11 +42,39 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
             super.onBackPressed()
         }
 
-        if (navigation?.fragments?.size == 1) {
-            tabbar?.visibility = View.VISIBLE
-        } else {
-            tabbar?.visibility = if (lastVisibleTabbar) View.VISIBLE else View.GONE
+//        if (navigation?.fragments?.size == 1) {
+//            showTabbar(true)
+//        } else {
+//            showTabbar(lastVisibleTabbar)
+//        }
+    }
+
+    fun showTabbar(isShow: Boolean) {
+        tabbar?.let {
+            it.animate()
+                .setDuration(200)
+                .translationY(if (isShow) 0f else 200f)
+                .alpha(if (isShow) 1f else 0.0f)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(p0: Animator?) {
+
+                    }
+
+                    override fun onAnimationEnd(p0: Animator?) {
+                        tabbar?.visibility = if (isShow) View.VISIBLE else View.GONE
+                    }
+
+                    override fun onAnimationCancel(p0: Animator?) {
+
+                    }
+
+                    override fun onAnimationRepeat(p0: Animator?) {
+
+                    }
+                })
+                .start()
         }
+//        tabbar?.visibility = if (isShow) View.VISIBLE else View.GONE
     }
 
     fun showProgress(isShow: Boolean) {
@@ -60,7 +87,7 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
 }
 
 fun MyFragment.pushAndHideTabbar(fragment: MyFragment) {
-    mActivity?.lastVisibleTabbar = mActivity?.tabbar?.visibility == View.VISIBLE
+    fragment.isVisibleTabbar = false
     mActivity?.navigation?.push(fragment)
-    mActivity?.tabbar?.visibility = View.GONE
+    mActivity?.showTabbar(false)
 }
