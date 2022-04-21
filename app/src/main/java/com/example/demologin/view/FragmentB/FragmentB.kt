@@ -8,6 +8,7 @@ import com.example.demologin.databinding.FragmentCoffeeBinding
 import com.example.demologin.view.CoffeeFragment.CoffeeFragment
 import com.example.demologin.view.base.BaseFragment
 import com.example.demologin.view.base.BaseViewModel
+import com.example.demologin.view.base.pushAndHideTabbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,10 +28,10 @@ class FragmentB : BaseFragment<FragmentBViewModel, FragmentBBinding>() {
         binding.root.setOnClickListener { navigation?.pop() }
 
         binding.button.setOnClickListener {
-            navigation?.push(FragmentB(), "C")
+            pushAndHideTabbar(FragmentB())
         }
         binding.button2.setOnClickListener {
-            navigation?.setRoot(CoffeeFragment())
+            navigation?.popToRoot()
         }
 
         viewModel.toString()

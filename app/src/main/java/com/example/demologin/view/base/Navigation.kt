@@ -1,25 +1,16 @@
 package com.example.demologin.view.base
 
 import androidx.fragment.app.Fragment
-import com.google.android.material.slider.BaseOnChangeListener
+
+typealias MyFragment = BaseFragment<*, *>
+typealias MyActivity = BaseActivity<*, *>
 
 interface Navigation {
-    var fragments: MutableList<Fragment>
-    fun push(fragment: Fragment, tag: String? = null, withAnimation: Boolean = true)
+    var fragments: MutableList<MyFragment>
+    fun push(fragment: MyFragment, tag: String? = null, withAnimation: Boolean = true)
     fun pop(tag: String? = null)
-    fun setRoot(fragment: Fragment)
+    fun setRoot(fragment: MyFragment)
     fun popToRoot()
-}
-
-interface  NavigationWithTabbar {
-    var currentSelectedPosition: Int
-    var fragments: MutableList<Fragment>
-
-    fun switchTab(index: Int)
-    fun setTabChange(onChangeListener: OnTabChangeListener)
-    fun push(fragment: Fragment, tag: String? = null, withAnimation: Boolean = true, hideTabbar: Boolean = false)
-    fun pop(tag: String? = null)
-
 }
 
 interface OnTabChangeListener {

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel @Inject constructor() : ViewModel() {
 
     val isShowProgress = MutableLiveData<Boolean>()
 

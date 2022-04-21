@@ -11,6 +11,8 @@ import javax.inject.Inject
 
 open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
 
+    var myTag: String = this::class.java.simpleName
+
     @Inject
     lateinit var viewModel: V
 
@@ -20,7 +22,7 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
 
     var navigation: Navigation? = null
 
-    val mActivity: BaseActivity<*, *>? by lazy {
+    val mActivity: MyActivity? by lazy {
        return@lazy this.activity as? BaseActivity<*, *>
     }
 
