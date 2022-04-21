@@ -16,13 +16,13 @@ abstract class BaseSingleAdapter<VH : RecyclerView.ViewHolder, E, B : ViewBindin
     fun loadMore() {
         isLoadMore = true
         listItem.add(null)
-        notifyItemInserted(listItem.count() - 1)
+        notifyItemInserted(listItem.size - 1)
     }
 
     fun setupData(list: List<E>) {
         listItem.removeAll(listItem)
         listItem.addAll(list)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(listItem.size, list.size)
     }
 
     private val VIEW_TYPE_ITEM = 0
@@ -31,7 +31,7 @@ abstract class BaseSingleAdapter<VH : RecyclerView.ViewHolder, E, B : ViewBindin
     fun addData(list: List<E>, index: Int) {
 
         listItem.addAll(index, list)
-        notifyItemRangeChanged(index, list.count())
+        notifyItemRangeChanged(index, list.size)
     }
 
     fun appendWhenLoadMore(list: List<E>) {
@@ -39,8 +39,8 @@ abstract class BaseSingleAdapter<VH : RecyclerView.ViewHolder, E, B : ViewBindin
             listItem.removeLast(); isLoadMore = false
         }
 
-        listItem.addAll(listItem.count() - 1, list)
-        notifyItemRangeChanged(listItem.count() - 1, list.count())
+        listItem.addAll(listItem.size - 1, list)
+        notifyItemRangeChanged(listItem.size - 1, list.size)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -69,8 +69,6 @@ abstract class BaseSingleAdapter<VH : RecyclerView.ViewHolder, E, B : ViewBindin
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder !is LoadingViewHolder) {
             bindingViewHolder(holder as VH, position)
-        } else {
-
         }
     }
 

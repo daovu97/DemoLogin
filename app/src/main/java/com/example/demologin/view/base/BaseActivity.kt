@@ -36,14 +36,14 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
     open fun setupView(savedInstanceState: Bundle?) {}
 
     override fun onBackPressed() {
-        if (navigation == null || navigation?.fragments?.count() == 1) {
+        if (navigation == null || navigation?.fragments?.size == 1) {
             finish()
         } else {
             navigation?.fragments?.removeLast()
             super.onBackPressed()
         }
 
-        if (navigation?.fragments?.count() == 1) {
+        if (navigation?.fragments?.size == 1) {
             tabbar?.visibility = View.VISIBLE
         } else {
             tabbar?.visibility = if (lastVisibleTabbar) View.VISIBLE else View.GONE

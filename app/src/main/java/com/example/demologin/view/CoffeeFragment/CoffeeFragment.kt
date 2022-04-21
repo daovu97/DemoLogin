@@ -23,7 +23,6 @@ class CoffeeFragment : BaseFragment<CoffeeViewModel, FragmentCoffeeBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) {
-        super.makeViewBinding(inflater, container, savedInstanceState)
         binding = FragmentCoffeeBinding.inflate(inflater, container, false)
     }
 
@@ -36,14 +35,14 @@ class CoffeeFragment : BaseFragment<CoffeeViewModel, FragmentCoffeeBinding>() {
             navigation?.push(FragmentB())
         }
 
-        viewModel.coffees.observe(this, Observer {
+        viewModel.coffees.observe(this) {
             isLoading = false
             if (adapter.listItem.isEmpty()) {
                 adapter.setupData(it)
             } else {
                 adapter.appendWhenLoadMore(it)
             }
-        })
+        }
 
         viewModel.getCoffee()
 

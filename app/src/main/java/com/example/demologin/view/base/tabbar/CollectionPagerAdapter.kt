@@ -9,10 +9,10 @@ class CollectionPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment
 
     fun setUpFragment(fragments: List<Fragment>) {
         this.fragments = fragments
-        notifyDataSetChanged()
+        notifyItemRangeInserted(this.fragments.size, fragments.size)
     }
 
-    override fun getItemCount(): Int = fragments.count()
+    override fun getItemCount(): Int = fragments.size
 
     override fun createFragment(position: Int): Fragment {
         return fragments[position]

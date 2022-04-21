@@ -43,12 +43,12 @@ class MainNavigation constructor(
     override fun pop(tag: String?) {
         if (tag != null) {
             val index = fragments.indexOfFirst { it.myTag == tag }
-            if (index != -1 ) {
-                    if (fragments[index] is TabbarFragment) {
-                        (activity as? BaseActivity<*, *>)?.tabbar?.visibility = View.VISIBLE
-                    }
+            if (index != -1) {
+                if (fragments[index] is TabbarFragment) {
+                    (activity as? BaseActivity<*, *>)?.tabbar?.visibility = View.VISIBLE
+                }
                 fragments.removeAll(fragments.subList(index, fragments.size))
-                fragmentManager.popBackStack(tag,  FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                fragmentManager.popBackStack(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             } else {
                 activity.onBackPressed()
             }
