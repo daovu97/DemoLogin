@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.example.demologin.resource.setPaddingAsDP
 import javax.inject.Inject
 
 open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
@@ -40,12 +41,9 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
     override fun onResume() {
         super.onResume()
         if (parentFragment == null && isVisibleTabbar) {
-            val scale = resources.displayMetrics.density
-            val dpAsPixels = (60 * scale + 0.5f)
-
-            binding.root.setPadding(0,0,0, dpAsPixels.toInt())
+            binding.root.setPaddingAsDP(bottom = 60)
         } else {
-            binding.root.setPadding(0,0,0, 0)
+            binding.root.setPaddingAsDP()
         }
 
         mActivity?.showTabbar(isVisibleTabbar)

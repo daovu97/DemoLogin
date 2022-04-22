@@ -1,12 +1,11 @@
 package com.example.demologin.view.base
 
-import android.animation.Animator
 import android.os.Bundle
 import android.view.View
-import android.view.ViewPropertyAnimator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.example.demologin.resource.customView.ProgressView
+import com.example.demologin.resource.setComplete
 import javax.inject.Inject
 
 open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity() {
@@ -59,30 +58,4 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
             progress.dismiss()
         }
     }
-}
-
-fun MyFragment.pushAndHideTabbar(fragment: MyFragment) {
-    fragment.isVisibleTabbar = false
-    mActivity?.navigation?.push(fragment)
-}
-
-fun ViewPropertyAnimator.setComplete(completion: (Animator?) -> Unit) : ViewPropertyAnimator{
-   return setListener(object : Animator.AnimatorListener {
-        override fun onAnimationStart(p0: Animator?) {
-
-        }
-
-        override fun onAnimationEnd(p0: Animator?) {
-            completion(p0)
-
-        }
-
-        override fun onAnimationCancel(p0: Animator?) {
-
-        }
-
-        override fun onAnimationRepeat(p0: Animator?) {
-
-        }
-    })
 }
