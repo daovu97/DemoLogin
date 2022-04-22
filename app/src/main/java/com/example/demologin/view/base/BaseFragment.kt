@@ -1,5 +1,6 @@
 package com.example.demologin.view.base
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +37,10 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
         viewModel.isShowProgress.observe(this) { isShow ->
             mActivity?.showProgress(isShow)
         }
+
+        viewModel.needRetry.observe(this) { isShow ->
+           if (isShow) showRetryAlert()
+        }
     }
 
     override fun onResume() {
@@ -64,5 +69,19 @@ open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
             setupView()
         }
         return this.view!!.root
+    }
+
+    private fun showRetryAlert() {
+        AlertDialog.Builder(context)
+            .setTitle("Network Error")
+            .setMessage("Are you sure you want to retry this") // Specifying a listener allows you to take an action before dismissing the dialog.
+            // The dialog is automatically dismissed when a dialog button is clicked.
+            .setPositiveButton(
+                "retry"
+            ) { _, _ ->
+                viewModel.handleRetry()
+            } // A null listener allows the button to dismiss the dialog and take no further action.
+            .setNegativeButton("no", null)
+            .show()
     }
 }

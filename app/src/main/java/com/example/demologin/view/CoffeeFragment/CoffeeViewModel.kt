@@ -1,6 +1,5 @@
 package com.example.demologin.view.CoffeeFragment
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.demologin.data.response.Coffee
@@ -27,9 +26,14 @@ class CoffeeViewModel @Inject constructor(private val coffeesUseCase: GetCoffees
             }
 
             coffee.onFailure {
-                Log.d("a", it.localizedMessage)
+               handleError(it)
             }
             hideProgress()
         }
+    }
+
+    override fun handleRetry() {
+        super.handleRetry()
+        getCoffee()
     }
 }
