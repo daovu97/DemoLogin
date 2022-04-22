@@ -3,8 +3,8 @@ package com.example.demologin.view.base
 import android.animation.Animator
 import android.os.Bundle
 import android.view.View
+import android.view.ViewPropertyAnimator
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.demologin.resource.customView.ProgressView
 import javax.inject.Inject
@@ -44,24 +44,12 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
     }
 
     fun showTabbar(isShow: Boolean) {
-        tabbar?.animate()?.setDuration(200)?.translationY(if (isShow) 0f else 200f)?.alpha(if (isShow) 1f else 0.0f)
-            ?.setListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(p0: Animator?) {
-
-                }
-
-                override fun onAnimationEnd(p0: Animator?) {
-                    tabbar?.visibility = if (isShow) View.VISIBLE else View.GONE
-                }
-
-                override fun onAnimationCancel(p0: Animator?) {
-
-                }
-
-                override fun onAnimationRepeat(p0: Animator?) {
-
-                }
-            })?.start()
+        tabbar?.animate()
+            ?.setDuration(400)?.translationY(if (isShow) 0f else 200f)
+            ?.alpha(if (isShow) 1f else 0.0f)
+            ?.setComplete {
+                tabbar?.visibility = if (isShow) View.VISIBLE else View.GONE
+            }?.start()
     }
 
     fun showProgress(isShow: Boolean) {
@@ -76,4 +64,25 @@ open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity(
 fun MyFragment.pushAndHideTabbar(fragment: MyFragment) {
     fragment.isVisibleTabbar = false
     mActivity?.navigation?.push(fragment)
+}
+
+fun ViewPropertyAnimator.setComplete(completion: (Animator?) -> Unit) : ViewPropertyAnimator{
+   return setListener(object : Animator.AnimatorListener {
+        override fun onAnimationStart(p0: Animator?) {
+
+        }
+
+        override fun onAnimationEnd(p0: Animator?) {
+            completion(p0)
+
+        }
+
+        override fun onAnimationCancel(p0: Animator?) {
+
+        }
+
+        override fun onAnimationRepeat(p0: Animator?) {
+
+        }
+    })
 }
