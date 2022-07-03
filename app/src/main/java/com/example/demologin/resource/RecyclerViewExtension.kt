@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewPropertyAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.demologin.view.base.MyFragment
+import com.example.demologin.application.base.MyFragment
 
 fun RecyclerView.setupLoadMore(completion: () -> Unit) {
     addOnScrollListener(object : RecyclerView.OnScrollListener() {

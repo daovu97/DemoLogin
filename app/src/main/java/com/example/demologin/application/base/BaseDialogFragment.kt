@@ -1,4 +1,4 @@
-package com.example.demologin.view.base
+package com.example.demologin.application.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

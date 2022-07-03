@@ -1,4 +1,4 @@
-package com.example.demologin.view.base
+package com.example.demologin.application.base
 
 typealias MyFragment = BaseFragment<*, *>
 typealias MyActivity = BaseActivity<*, *>

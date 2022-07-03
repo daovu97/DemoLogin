@@ -1,4 +1,4 @@
-package com.example.demologin.view.base.tabbar
+package com.example.demologin.application.base.tabbar
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

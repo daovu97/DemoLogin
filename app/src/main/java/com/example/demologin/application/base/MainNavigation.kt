@@ -1,4 +1,4 @@
-package com.example.demologin.view.base
+package com.example.demologin.application.base
 
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity

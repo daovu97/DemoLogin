@@ -1,12 +1,13 @@
-package com.example.demologin.view.base.tabbar
+package com.example.demologin.application.base.tabbar
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.demologin.databinding.CollectionDemoBinding
-import com.example.demologin.view.base.BaseFragment
-import com.example.demologin.view.base.BaseViewModel
+import com.example.demologin.application.base.BaseFragment
+import com.example.demologin.application.base.BaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -14,6 +15,8 @@ import javax.inject.Inject
 class TabbarFragment @Inject constructor(private val fragments: List<Fragment>) : BaseFragment<BaseViewModel, CollectionDemoBinding>() {
 
     private lateinit var collectionAdapter: CollectionPagerAdapter
+
+    override val viewModel: BaseViewModel by viewModels()
 
     override fun makeViewBinding(
         inflater: LayoutInflater,

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demologin.data.response.Coffee
 import com.example.demologin.databinding.ItemCoffeBinding
-import com.example.demologin.view.base.BaseSingleAdapter
+import com.example.demologin.application.base.BaseSingleAdapter
 import javax.inject.Inject
 
 class CoffeeAdapter @Inject constructor() :

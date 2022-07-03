@@ -3,15 +3,20 @@ package com.example.demologin.view.FragmentB
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.demologin.databinding.FragmentBBinding
 import com.example.demologin.resource.pushAndHideTabbar
-import com.example.demologin.view.base.BaseFragment
-import com.example.demologin.view.base.BaseViewModel
+import com.example.demologin.application.base.BaseFragment
+import com.example.demologin.application.base.BaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class FragmentB : BaseFragment<FragmentBViewModel, FragmentBBinding>() {
+
+    override val viewModel: FragmentBViewModel by viewModels()
+
     override fun makeViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +41,7 @@ class FragmentB : BaseFragment<FragmentBViewModel, FragmentBBinding>() {
     }
 }
 
+@HiltViewModel
 class FragmentBViewModel @Inject constructor() : BaseViewModel() {
 
 }

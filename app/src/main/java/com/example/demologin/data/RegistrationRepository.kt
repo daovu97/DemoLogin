@@ -1,7 +1,6 @@
-package com.example.demologin.domain
+package com.example.demologin.data
 
 import com.example.demologin.data.response.Coffee
-import com.example.demologin.domain.entity.UserEntity
 
 interface RegistrationRepository {
     suspend fun getCoffees(): Result<List<Coffee>>

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.demologin.databinding.CustomDialogFragmentBinding
-import com.example.demologin.view.base.BaseDialogFragment
+import com.example.demologin.application.base.BaseDialogFragment
 import javax.inject.Inject
 
 class ProgressView @Inject constructor() : BaseDialogFragment<CustomDialogFragmentBinding>() {

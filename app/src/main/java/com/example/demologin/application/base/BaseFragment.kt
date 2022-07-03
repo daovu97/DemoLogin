@@ -1,4 +1,4 @@
-package com.example.demologin.view.base
+package com.example.demologin.application.base
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,14 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.demologin.resource.setPaddingAsDP
-import javax.inject.Inject
 
-open class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
+abstract class BaseFragment<V : BaseViewModel, B : ViewBinding> : Fragment() {
 
     var myTag: String = this::class.java.simpleName
 
-    @Inject
-    lateinit var viewModel: V
+    abstract val viewModel: V
 
     lateinit var binding: B
 

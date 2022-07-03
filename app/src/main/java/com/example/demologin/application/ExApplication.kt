@@ -1,4 +1,4 @@
-package com.example.demologin.view.application
+package com.example.demologin.application
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

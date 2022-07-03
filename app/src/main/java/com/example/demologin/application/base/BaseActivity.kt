@@ -1,4 +1,4 @@
-package com.example.demologin.view.base
+package com.example.demologin.application.base
 
 import android.os.Bundle
 import android.view.View
@@ -8,10 +8,9 @@ import com.example.demologin.resource.customView.ProgressView
 import com.example.demologin.resource.setComplete
 import javax.inject.Inject
 
-open class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity() {
+abstract class BaseActivity<V : BaseViewModel, B : ViewBinding> : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModel: V
+    abstract val viewModel: V
 
     @Inject
     lateinit var progress: ProgressView

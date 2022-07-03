@@ -3,17 +3,18 @@ package com.example.demologin.view.CoffeeFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
 import com.example.demologin.databinding.FragmentCoffeeBinding
 import com.example.demologin.resource.setupLoadMore
 import com.example.demologin.view.FragmentB.FragmentB
-import com.example.demologin.view.base.BaseFragment
+import com.example.demologin.application.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class CoffeeFragment : BaseFragment<CoffeeViewModel, FragmentCoffeeBinding>() {
+
+     override val viewModel: CoffeeViewModel by viewModels()
 
     @Inject
     lateinit var adapter: CoffeeAdapter
